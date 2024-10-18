@@ -18,6 +18,13 @@ resource "aws_iam_role" "aws_iam_role_control" {
   })
 }
 
+resource "aws_iam_role_policy_attachment" "rke2_ssm_control_policy" {
+  role       = aws_iam_role.aws_iam_role_control.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  
+  depends_on = [aws_iam_role.aws_iam_role_control]
+}
+
 resource "aws_iam_role_policy" "aws_iam_policy_control" {
   name       = "${var.prefix}-iam-policy-control"
   role       = aws_iam_role.aws_iam_role_control.id
@@ -126,6 +133,12 @@ resource "aws_iam_role" "aws_iam_role_worker" {
       },
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "rke2_ssm_worker_policy" {
+  role       = aws_iam_role.aws_iam_role_worker.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  depends_on = [aws_iam_role.aws_iam_role_worker]
 }
 
 resource "aws_iam_role_policy" "aws_iam_policy_worker" {

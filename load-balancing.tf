@@ -8,7 +8,7 @@ resource "aws_elb" "aws_rke2_elb" {
   name                        = "${var.prefix}-k8s-lb"
   security_groups             = [aws_security_group.aws_rke2_sg.id]
   subnets                     = [aws_subnet.aws_rke2_public_subnet1.id, aws_subnet.aws_rke2_public_subnet2.id, aws_subnet.aws_rke2_public_subnet3.id]
-  depends_on                  = [aws_instance.aws_ec2_instance_control, aws_instance.aws_ec2_instance_controls]
+  depends_on                  = [aws_instance.aws_ec2_instance_control]
 
   health_check {
     healthy_threshold   = 3
@@ -51,13 +51,6 @@ resource "aws_elb_attachment" "aws_rke2_elb_attachment1" {
   depends_on = [aws_elb.aws_rke2_elb]
 }
 
-resource "aws_elb_attachment" "aws_rke2_elb_attachment2" {
-  elb        = aws_elb.aws_rke2_elb.id
-  count      = var.number_of_instances_controls
-  instance   = aws_instance.aws_ec2_instance_controls[count.index].id
-  depends_on = [aws_elb.aws_rke2_elb]
-}
-
 resource "aws_elb" "aws_rke2_ingress_elb" {
   connection_draining         = false
   connection_draining_timeout = 300
@@ -68,7 +61,7 @@ resource "aws_elb" "aws_rke2_ingress_elb" {
   name                        = "${var.prefix}-ingress-lb"
   security_groups             = [aws_security_group.aws_rke2_sg.id]
   subnets                     = [aws_subnet.aws_rke2_public_subnet1.id, aws_subnet.aws_rke2_public_subnet2.id, aws_subnet.aws_rke2_public_subnet3.id]
-  depends_on                  = [aws_instance.aws_ec2_instance_control, aws_instance.aws_ec2_instance_controls, aws_instance.aws_ec2_instance_worker]
+  depends_on                  = [aws_instance.aws_ec2_instance_control, aws_instance.aws_ec2_instance_worker]
 
   health_check {
     healthy_threshold   = 3
@@ -96,13 +89,6 @@ resource "aws_elb_attachment" "aws_rke2_ingress_elb_attachment1" {
   elb        = aws_elb.aws_rke2_ingress_elb.id
   count      = var.number_of_instances_control
   instance   = aws_instance.aws_ec2_instance_control[count.index].id
-  depends_on = [aws_elb.aws_rke2_ingress_elb]
-}
-
-resource "aws_elb_attachment" "aws_rke2_ingress_elb_attachment2" {
-  elb        = aws_elb.aws_rke2_ingress_elb.id
-  count      = var.number_of_instances_controls
-  instance   = aws_instance.aws_ec2_instance_controls[count.index].id
   depends_on = [aws_elb.aws_rke2_ingress_elb]
 }
 

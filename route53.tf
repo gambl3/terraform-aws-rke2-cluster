@@ -4,7 +4,7 @@ data "aws_route53_zone" "aws_rke2_zone" {
 
 resource "aws_route53_record" "aws_rke2_record_rke2" {
   zone_id = data.aws_route53_zone.aws_rke2_zone.zone_id
-  name    = ""
+  name    = var.prefix
   type    = "A"
   alias {
     name                   = aws_elb.aws_rke2_elb.dns_name

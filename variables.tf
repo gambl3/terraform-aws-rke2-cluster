@@ -4,16 +4,6 @@ variable "region" {
   description = "(Required) The AWS Region to use for the instance(s)."
 }
 
-variable "access_key" {
-  type        = string
-  description = "(Required) The AWS Access Key to use for the instance(s)."
-}
-
-variable "secret_key" {
-  type        = string
-  description = "(Required) The AWS Secret Key to use for the instance(s)."
-}
-
 variable "key_pair_name" {
   type        = string
   description = "(Required) The AWS Key Pair name to use for the instance(s)."
@@ -43,7 +33,7 @@ variable "token" {
 }
 
 variable "vRKE2" {
-  default     = "v1.29"
+  default     = "v1.31.1+rke2r1"
   type        = string
   description = "(Optional) The RKE2 Version to use for the clusters(s)."
 }
@@ -74,20 +64,8 @@ variable "instance_type_control" {
   description = "(Optional) The AWS Instance type to use for the instance(s)."
 }
 
-variable "instance_type_controls" {
-  default     = "m5.2xlarge"
-  type        = string
-  description = "(Optional) The AWS Instance type to use for the instance(s)."
-}
-
 variable "instance_type_worker" {
   default     = "m5.2xlarge"
-  type        = string
-  description = "(Optional) The AWS Instance type to use for the instance(s)."
-}
-
-variable "instance_type_bastion" {
-  default     = "c5.large"
   type        = string
   description = "(Optional) The AWS Instance type to use for the instance(s)."
 }
@@ -98,20 +76,8 @@ variable "number_of_instances_control" {
   description = "(Optional) The number of AWS EC2 instances to create on deployment."
 }
 
-variable "number_of_instances_controls" {
-  default     = 2
-  type        = number
-  description = "(Optional) The number of AWS EC2 instances to create on deployment."
-}
-
 variable "number_of_instances_worker" {
   default     = 3
-  type        = number
-  description = "(Optional) The number of AWS EC2 instances to create on deployment."
-}
-
-variable "number_of_instances_bastion" {
-  default     = 1
   type        = number
   description = "(Optional) The number of AWS EC2 instances to create on deployment."
 }
@@ -123,20 +89,8 @@ variable "volume_size_control" {
   description = "(Optional) The AWS Volume Size to use for the instance(s)."
 }
 
-variable "volume_size_controls" {
-  default     = 128
-  type        = number
-  description = "(Optional) The AWS Volume Size to use for the instance(s)."
-}
-
 variable "volume_size_worker" {
   default     = 256
-  type        = number
-  description = "(Optional) The AWS Volume Size to use for the instance(s)."
-}
-
-variable "volume_size_bastion" {
-  default     = 64
   type        = number
   description = "(Optional) The AWS Volume Size to use for the instance(s)."
 }
@@ -147,19 +101,7 @@ variable "volume_type_control" {
   description = "(Optional) The AWS Volume Type to use for the instance(s)."
 }
 
-variable "volume_type_controls" {
-  default     = "gp3"
-  type        = string
-  description = "(Optional) The AWS Volume Type to use for the instance(s)."
-}
-
 variable "volume_type_worker" {
-  default     = "gp3"
-  type        = string
-  description = "(Optional) The AWS Volume Type to use for the instance(s)."
-}
-
-variable "volume_type_bastion" {
   default     = "gp3"
   type        = string
   description = "(Optional) The AWS Volume Type to use for the instance(s)."
