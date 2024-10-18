@@ -65,7 +65,6 @@ cat << EOF >> /etc/rancher/rke2/config.yaml
 token: $TOKEN
 tls-san:
   - $DOMAIN
-  - 127.0.0.1
 EOF
 
 # Download and Install RKE2 Server
@@ -76,6 +75,7 @@ systemctl enable rke2-server.service && systemctl start rke2-server.service
 
 # Symlink kubectl and containerd
 sudo curl -L -o /usr/local/bin/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x /usr/local/bin/kubectl 
 
 # Update and Source BASHRC
 cat << EOF >> ~/.bashrc
@@ -84,7 +84,7 @@ export CRI_CONFIG_FILE=/var/lib/rancher/rke2/agent/etc/crictl.yaml
 export DOMAIN=${DOMAIN}
 export TOKEN=${TOKEN}
 export vRKE2=${vRKE2}
-alias k=kubectl
+alias k=/usr/local/bin/kubectl
 EOF
 
 # Source BASHRC

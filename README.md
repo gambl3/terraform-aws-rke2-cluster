@@ -19,8 +19,6 @@ module "rke2-cluster" {
   version = "1.2.1"
 
   region        = "us-east-1"
-  access_key    = "ACCESS_KEY_HERE"
-  secret_key    = "SECRET_KEY_HERE"
   key_pair_name = "AWS_KEY_PAIR_NAME"
   domain        = "example.com"
   prefix        = "rke2-cluster"
@@ -37,8 +35,7 @@ terraform plan
 terraform apply --auto-approve
 ```
 
-**Step 4:** Wait about 10 minutes and access your RKE2 Cluster! Typically, users SSH into the nodes via the bastion host to use _kubectl_ on the node or users export the kubeconfig (`/etc/rancher/rke2/rke2.yaml`) to access the cluster and _kubectl_ locally.
-
+**Step 4:** Wait about 10 minutes and access your busted/non-functional RKE2 Cluster! SSM can be used to access the nodes to endlessly troubleshoot.
 ### Contributing
 
 Please utilize GitHubs features such as Issues, Forks, and Pull Requests to contribute to this code!
@@ -47,8 +44,5 @@ Please utilize GitHubs features such as Issues, Forks, and Pull Requests to cont
 
 A little bit about me and my history in the industry. If you have any questions, please reach out to me at zbrady@zackbrady.com!
 
-- Former Contractor
-- U.S. Military Reservist
-- Open-Source Contributor
-- Built and Exited a Digital Firm
-- Active Volunteer Firefighter/EMT
+- Contractor
+- Retired Army
